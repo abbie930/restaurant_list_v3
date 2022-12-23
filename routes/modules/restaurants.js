@@ -9,7 +9,7 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const id = req.params.id
+    const { id } = req.params
     const restaurant = await Restaurant.findById(id).lean()
     res.render('show', { restaurant })
   } catch (error) {
@@ -20,7 +20,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const restaurant = await Restaurant.create(req.body)
-    res.redirect('/')
+    const id = restaurant._id
+    res.redirect(`/restaurants/${id}`)
   } catch (error) {
     console.log(error)
   }
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:id/edit', async (req, res) => {
   try {
-    const id = req.params.id
+    const { id } = req.params
     const restaurant = await Restaurant.findById(id).lean()
     res.render('edit', { restaurant })
   } catch (error) {
@@ -39,12 +40,8 @@ router.get('/:id/edit', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const id = req.params.id
-    const restaurant = await Restaurant.findById(id)
-    for (let key in req.body) {
-      restaurant[key] = req.body[key]
-    }
-    await restaurant.save()
+    const { id } = req.params
+    await Restaurant.findByIdAndUpdate(id, req.body)
     res.redirect(`/restaurants/${id}`)
   } catch (error) {
     console.log(error)
@@ -53,9 +50,8 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const id = req.params.id
-    const restaurant = await Restaurant.findById(id)
-    await restaurant.remove()
+    const { id } = req.params
+    await Restaurant.findByIdAndDelete(id)
     res.redirect('/')
   } catch (error) {
     console.log(error)
