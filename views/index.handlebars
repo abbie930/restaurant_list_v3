@@ -2,19 +2,26 @@
 <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
-      <form action="/search">
+      <form action="/search" id="form">
         <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
-            value="{{keywords}}" aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        <div class="d-flex flex-column flex-sm-row align-items-center">
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+              value="{{keywords}}" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
           </div>
+          <div class="input-group" style="width:160px">
+            <select class="form-select" name="sort" id="sort" aria-label="Default select example">
+              <option value="A~Z">A ~ Z</option>
+              <option value="Z~A">Z ~ A</option>
+              <option>類別</option>
+              <option>地區</option>
+            </select>
+          </div>
+        </div>
       </form>
-      <div class="text-end mx-3">
-        <a href="/restaurants/new" class="btn btn-major">新增餐廳</a>
-      </div>
-      </div>
     </div>
   </div>
 </div>
@@ -45,7 +52,7 @@
                 <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-secondary btn-sm mx-2">Edit</button></a>
                 <a href="/restaurants/{{this._id}}"><button class="btn btn btn-secondary btn-sm mx-2">Details</button></a>
                 <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-secondary btn-sm text-white mx-2">Delete</button>
+                  <button type="submit" class="btn btn-outline-secondary btn-sm mx-2">Delete</button>
                 </form>
               </div>
           </div>

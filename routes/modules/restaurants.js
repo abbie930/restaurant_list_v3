@@ -13,6 +13,7 @@ router.get('/:id', async (req, res) => {
     const restaurant = await Restaurant.findById(id).lean()
     res.render('show', { restaurant })
   } catch (error) {
+    console.log(error)
   }
 })
 
