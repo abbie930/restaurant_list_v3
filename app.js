@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Restaurant = require('./models/restaurant')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -35,6 +36,7 @@ app.use(express.static('public'))
 //setting body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(methodOverride('_method'))
 
 //routes setting
 app.get('/', async (req, res) => {
@@ -84,7 +86,7 @@ app.get('/restaurants/:id/edit', async (req, res) => {
 })
 
 //編輯餐廳資料
-app.post('/restaurants/:id/edit', async (req, res) => {
+app.put('/restaurants/:id', async (req, res) => {
   try {
     const id = req.params.id
     const restaurant = await Restaurant.findById(id)
@@ -99,7 +101,7 @@ app.post('/restaurants/:id/edit', async (req, res) => {
 })
 
 //刪除餐廳
-app.post('/restaurants/:id/delete', async (req, res) => {
+app.delete('/restaurants/:id', async (req, res) => {
   try {
     const id = req.params.id
     const restaurant = await Restaurant.findById(id)
