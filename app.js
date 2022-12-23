@@ -44,10 +44,6 @@ app.get('/', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  // Restaurant.find()
-  //     .lean()
-  //     .then(restaurants => res.render('index', { restaurants }))
-  //     .catch(error => console.log(error))
 })
 
 //新增餐廳頁面
@@ -63,11 +59,6 @@ app.get('/restaurants/:id', async (req, res) => {
     res.render('show', { restaurant })
   } catch (error) {
   }
-  // const id = req.params.id
-  // return Restaurant.findById(id)
-  //   .lean()
-  //   .then((restaurant) => res.render('show', { restaurant }))
-  //   .catch(error => console.log(error))
 })
 
 //新增餐廳
@@ -79,9 +70,6 @@ app.post('/restaurants', async (req, res) => {
     console.log(error)
   }
 
-  // return Restaurant.create(req.body)
-  //    .then(() => res.redirect('/'))
-  //    .catch(error => console.log(error))
 })
 
 //編輯餐廳頁面
@@ -93,11 +81,6 @@ app.get('/restaurants/:id/edit', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  // const id = req.params.id
-  // return Restaurant.findById(id)
-  //   .lean()
-  //   .then((restaurant) => res.render('edit', { restaurant }))
-  //   .catch(error => console.log(error))
 })
 
 //編輯餐廳資料
@@ -113,16 +96,6 @@ app.post('/restaurants/:id/edit', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  // const id = req.params.id
-  // return Restaurant.findById(id)
-  //    .then(restaurant => {
-  //     for (let key in req.body) {
-  //       restaurant[key] = req.body[key]
-  //     }
-  //     return restaurant.save()
-  //    })
-  //    .then(() => res.redirect(`/restaurants/${id}`))
-  //    .catch(error => console.log(error))
 })
 
 //刪除餐廳
@@ -135,11 +108,6 @@ app.post('/restaurants/:id/delete', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  // const id = req.params.id
-  // return Restaurant.findById(id)
-  //    .then(restaurant => restaurant.remove())
-  //    .then(() => res.redirect('/'))
-  //    .catch(error => console.log(error))
 })
 
 
@@ -163,20 +131,6 @@ app.get('/search', async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-
-  // Restaurant.find()
-  //   .lean()
-  //   .then(restaurantData => {
-  //     const restaurants = restaurantData.filter((restaurant) => {
-  //       return restaurant.name.toLowerCase().includes(keyword) || 
-  //       restaurant.name_en.toLowerCase().includes(keyword) ||
-  //       restaurant.category.includes(keyword)
-  //     })
-
-
-  //     res.render('index', { restaurants , keywords })
-  //    })
-  //   .catch(error => console.log(error))
 
 })
 
