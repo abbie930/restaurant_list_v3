@@ -13,21 +13,18 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/search', async (req, res) => {
-  const keywords = req.query.keyword
-  const keyword = req.query.keyword.trim().toLowerCase()
-
-  if (!keywords) {
-    return res.redirect('/')
-  }
-
+  let { keyword, sort } = req.query
+  keyword = keyword.trim().toLowerCase()
+  
   try {
-    const restaurantData = await Restaurant.find().lean()
+    const restaurantData = await Restaurant.find().lean().sort((sort === 'asc' || sort === 'desc') ? { name: sort } : sort)
     const restaurants = restaurantData.filter((restaurant) => {
       return restaurant.name.toLowerCase().includes(keyword) || 
       restaurant.name_en.toLowerCase().includes(keyword) ||
       restaurant.category.includes(keyword)
     })
-    res.render('index', { restaurants , keywords })
+   
+    res.render('index', { restaurants, keyword, sort})
   } catch (error) {
     console.log(error)
   }

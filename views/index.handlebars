@@ -14,10 +14,10 @@
           </div>
           <div class="input-group" style="width:160px">
             <select class="form-select" name="sort" id="sort" aria-label="Default select example">
-              <option value="asc">A ~ Z</option>
-              <option value="desc">Z ~ A</option>
-              <option value="category">類別</option>
-              <option value="location">地區</option>
+              <option value="asc" {{#ifeq sort "asc"}} selected {{/ifeq}}>A -> Z</option>
+              <option value="desc" {{#ifeq sort "desc"}} selected {{/ifeq}}>Z -> A</option>
+              <option value="category" {{#ifeq sort "category"}} selected {{/ifeq}} >類別</option>
+              <option value="location" {{#ifeq sort "location"}} selected {{/ifeq}}>地區</option>
             </select>
           </div>
         </div>
