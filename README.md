@@ -1,7 +1,7 @@
 # 我的餐廳清單 My restaurant List
 一個餐廳清單網站，可以瀏覽餐廳並查看詳細資訊。
 
-![cover](./public/image/cover_restaurant_list_v2.png)
+![cover](./public/image/cover_restaurant_list_v3.png)
 
 
 
@@ -11,6 +11,7 @@
 * 使用者可以瀏覽餐廳的詳細資訊
 * 使用者可以連結餐廳的地址到 Google map
 * 使用者可以透過搜尋餐廳名稱、類別找到特定的餐廳
+* 使用者可以設定餐廳排序
 * 使用者可以新增餐廳
 * 使用者可以編輯餐廳
 * 使用者可以修改餐廳
@@ -21,12 +22,12 @@
 2. 打開終端機(Terminal)，將專案 clone 至本機位置
 
 ```
-git clone https://github.com/abbie930/restaurant_list_v2.git
+git clone https://github.com/abbie930/restaurant_list_v3.git
 ```
 3. 進入存放此專案的資料夾
 
 ```
-cd restaurant_list_v2
+cd restaurant_list_v3
 ```
 4. 安裝 npm 套件
 
