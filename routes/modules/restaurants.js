@@ -9,52 +9,58 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const { id } = req.params
-    const restaurant = await Restaurant.findById(id).lean()
+    const userId = req.user._id
+    const _id = req.params.id
+    const restaurant = await Restaurant.findOne({ _id, userId }).lean()
     res.render('show', { restaurant })
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 })
 
 router.post('/', async (req, res) => {
   try {
-    const restaurant = await Restaurant.create(req.body)
+    const userId = req.user._id
+    const newData = req.body
+    const restaurant = await Restaurant.create({ ...newData, userId })
     const id = restaurant._id
     res.redirect(`/restaurants/${id}`)
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
-
 })
 
 router.get('/:id/edit', async (req, res) => {
   try {
-    const { id } = req.params
-    const restaurant = await Restaurant.findById(id).lean()
+    const userId = req.user._id
+    const _id = req.params.id
+    const restaurant = await Restaurant.findOne({ _id, userId }).lean()
     res.render('edit', { restaurant })
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 })
 
 router.put('/:id', async (req, res) => {
   try {
-    const { id } = req.params
-    await Restaurant.findByIdAndUpdate(id, req.body)
-    res.redirect(`/restaurants/${id}`)
-  } catch (error) {
-    console.log(error)
+    const userId = req.user._id
+    const _id = req.params.id
+    const newData = req.body
+    await Restaurant.findOneAndUpdate({ _id, userId }, { ...newData, userId })
+    res.redirect(`/restaurants/${_id}`)
+  } catch (err) {
+    console.log(err)
   }
 })
 
 router.delete('/:id', async (req, res) => {
   try {
-    const { id } = req.params
-    await Restaurant.findByIdAndDelete(id)
+    const userId = req.user._id
+    const _id = req.params.id
+    await Restaurant.findOneAndDelete({ _id, userId })
     res.redirect('/')
-  } catch (error) {
-    console.log(error)
+  } catch (err) {
+    console.log(err)
   }
 })
 
