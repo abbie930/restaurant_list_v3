@@ -59,17 +59,6 @@ router.post('/register', async (req, res) => {
       })
       res.redirect('/')
     }
-    // return bcrypt.genSalt(10, (err, salt) => {
-    //   bcrypt.hash('password', salt, async (err, hash) => {
-    //     // Store hash in your password DB.
-    //     await User.create({
-    //       name,
-    //       email,
-    //       password: hash
-    //     })
-    //     res.redirect('/')
-    //   })
-    // })
   } catch (err) {
     console.log(err)
   }
