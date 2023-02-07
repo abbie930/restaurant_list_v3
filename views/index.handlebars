@@ -31,43 +31,40 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <div class="row row-cols-sm-3">
-        {{!-- use 'each' display restaurant list --}}
-        {{#each restaurants}}
-          <div class="card mb-3">
-            <img class="card-img-top" src="{{this.image}}"
-              alt="{{this.name}}">
-            <div class="card-body p-3">
-              <h6 class="card-title mb-1">{{this.name}}</h6>
-
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{this.category}}
-              </div>
-
-              <span class="badge rounded-pill bg-danger font-weight-normal">
-                {{this.rating}}
-                <i class="fas fa-star fa-xs"></i> 
-              </span>
-              </div>
-              <div class="card-footer d-flex justify-content-end flex-wrap">
-                <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-secondary btn-sm mx-2">Edit</button></a>
-                <a href="/restaurants/{{this._id}}"><button class="btn btn btn-secondary btn-sm mx-2">Details</button></a>
-                <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-outline-secondary btn-sm mx-2">Delete</button>
-                </form>
-              </div>
+    {{#each restaurants}}
+    <div class="col-sm-3 mt-3">
+      <div class="card shadow mb-3">
+        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
+        <div class="card-body p-3">
+          <h6 class="card-title mb-1">{{this.name}}</h6>
+          <div class="restaurant-category mb-1">
+            <i class="fas fa-utensils pr-2"></i> {{this.category}}
           </div>
-        {{else}}
-          <div class="row mx-auto">
-          <div class="wrong d-flex flex-column align-items-center mt-5">
-            <a href="/restaurants/new" class="add-item"><i class="d-flex justify-content-center fa-sharp fa-solid fa-circle-plus"></i></a>
-            <h5>Add Item</h5>
-            <p>點即可新增餐廳</p>
+          <span class="badge rounded-pill bg-danger font-weight-normal">
+            {{this.rating}}
+            <i class="fas fa-star fa-xs"></i>
+          </span>
+        </div>
+        
+        <div class="card-footer d-flex justify-content-end flex-wrap">
+          <div class="d-flex m-auto">
+            <a href="/restaurants/{{this._id}}/edit"><button class="btn btn-outline-secondary btn-sm mx-2"><i class="fa-solid fa-pen-to-square"></i></button></a>
+            <a href="/restaurants/{{this._id}}"><button class="btn btn-outline-secondary btn-sm mx-2"><i class="fa-solid fa-circle-info"></i></button></a>
+            <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-outline-secondary btn-sm mx-2"><i class="fa-regular fa-trash-can"></i></button>
+            </form>
           </div>
-          </div>
-        {{/each}}
+        </div>
       </div>
-    </div>  
-  </div> 
+    </div>
+    {{else}}
+    <div class="row mx-auto">
+      <div class="wrong d-flex flex-column align-items-center mt-5">
+        <a href="/restaurants/new" class="add-item"><i class="d-flex justify-content-center fa-sharp fa-solid fa-circle-plus"></i></a>
+        <h5>Add Item</h5>
+        <p>點即可新增餐廳</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 </div>
