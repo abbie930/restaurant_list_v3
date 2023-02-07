@@ -3,11 +3,11 @@ header {
 }
 
 .navbar .navbar-brand {
-  color: #4592af;
+  color: #6a5253;
 }
 
 .navbar .navbar-brand:hover {
-  color: #226089;
+  color: rgb(160, 127, 127);
 }
 
 .banner {
@@ -78,6 +78,10 @@ header {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.restaurant-icon {
+  filter: sepia(100%);
+}
+
 .wrong-search {
   width: 150px;
   height: 150px;
@@ -97,6 +101,7 @@ header {
 
 .add-item:hover {
     transform: scale(1.1);
+    color: #9b4b4b;
 }
 
 
