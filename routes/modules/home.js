@@ -27,8 +27,13 @@ router.get('/search', async (req, res) => {
       restaurant.name_en.toLowerCase().includes(keyword) ||
       restaurant.category.includes(keyword)
     })
+
+    if (!restaurants.length) {
+      res.render('error', { restaurants, keyword, sort })
+    } else {
+      res.render('index', { restaurants, keyword, sort })
+    }
    
-    res.render('index', { restaurants, keyword, sort})
   } catch (error) {
     console.log(error)
   }
