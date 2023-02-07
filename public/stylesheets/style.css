@@ -41,8 +41,14 @@ header {
 }
 
 .btn-major {
-  background-color: #9b4b4b;
+  background-color: #bb8077;
   color: white;
+}
+
+.btn-outline-secondary {
+  background-color: #bb8077;
+  color: white;
+  border: none;
 }
 
 .form-control:focus {
@@ -62,6 +68,11 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.card-footer {
+  border: none;
+  background: #e1dad9;
 }
 
 .restaurant-category {
