@@ -1,0 +1,38 @@
+<!-- search bar -->
+<div class="container search-bar">
+  <div class="search-bar-outer">
+    <div class="search-bar-inner">
+      <form action="/search" id="form">
+      <div class="d-flex justify-content-between">
+        <h4 class="mb-2">尋找餐廳：</h4>
+        <a href="/restaurants/new" class="btn btn-major mb-2">新增餐廳</a>
+      </div>
+        <div class="d-flex flex-column flex-sm-row align-items-center">
+          <div class="input-group">
+            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
+              value="{{keyword}}" aria-describedby="search-button">
+            <div class="input-group-append">
+              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <div class="input-group" style="width:160px">
+            <select class="form-select" name="sort" id="sort" aria-label="Default select example">
+              <option value="asc" {{#ifeq sort "asc"}} selected {{/ifeq}}>A -> Z</option>
+              <option value="desc" {{#ifeq sort "desc"}} selected {{/ifeq}}>Z -> A</option>
+              <option value="category" {{#ifeq sort "category"}} selected {{/ifeq}} >類別</option>
+              <option value="location" {{#ifeq sort "location"}} selected {{/ifeq}}>地區</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class='row mx-auto'>
+  <div class='wrong d-flex flex-column align-items-center mt-5'>
+    <i class='d-flex justify-content-center wrong-search fa-solid fa-circle-xmark'></i>
+    <h5>找不到符合項目</h5>
+    <p>請改為搜尋其他項目</p>
+  </div>
+</div>
