@@ -81,9 +81,22 @@ header {
 .wrong-search {
   width: 150px;
   height: 150px;
-  margin-top: 50px;
+  margin-top: 80px;
   font-size: 100px;
   color: gray;
+}
+
+.add-item {
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  font-size: 100px;
+  color: #9b4b4b;
+  text-decoration: none;
+}
+
+.add-item:hover {
+    transform: scale(1.1);
 }
 
 
