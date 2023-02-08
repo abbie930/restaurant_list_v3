@@ -15,7 +15,12 @@ const SEED_USERS = [
     password: '12345678',
     restaurantIndex: [0, 1, 2],
   },
-  { name: 'user2', email: 'user2@example.com', password: '12345678', restaurantIndex: [3, 4, 5] },
+  {
+    name: 'user2',
+    email: 'user2@example.com',
+    password: '12345678',
+    restaurantIndex: [3, 4, 5],
+  },
 ]
 
 db.once('open', async () => {
