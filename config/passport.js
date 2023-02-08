@@ -57,7 +57,7 @@ module.exports = (app) => {
               })
             )
             .then((user) => done(null, user))
-            .catch((err) => done(err, false))
+            .catch((err) => done(err, false, req.flash('failure_msg', 'Facebook Verification Failed')))
         })
       }
     )
