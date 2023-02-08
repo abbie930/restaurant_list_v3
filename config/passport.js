@@ -14,16 +14,16 @@ module.exports = (app) => {
       try {
         const user = await User.findOne({ email })
         if (!user) {
-          done(null, false, req.flash('failure_msg', 'That email is not registered!'))
+          return done(null, false, req.flash('failure_msg', 'That email is not registered!'))
         }
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
-          done(null, false, req.flash('failure_msg', 'Email or Password incorrect.'))
+          return done(null, false, req.flash('failure_msg', 'Email or Password incorrect.'))
         } else {
-          done(null, user)
+          return done(null, user)
         }
       } catch (err) {
-        done(err, false)
+        return done(err, false)
       }
     })
   )
@@ -42,7 +42,7 @@ module.exports = (app) => {
           const { name, email } = profile._json
           const user = await User.findOne({ email })
           if (user) {
-            done(null, user)
+            return done(null, user)
           } else {
             const randomPassword = Math.random().toString(36).slice(-8)
             const salt = await bcrypt.genSalt(10)
@@ -52,10 +52,10 @@ module.exports = (app) => {
               email,
               password: hashedPassword,
             })
-            done(null, newUserFromFb)
+             return done(null, newUserFromFb)
           }
         } catch (err) {
-          done(err, false, req.flash('failure_msg', 'Facebook Verification Failed'))
+          return done(err, false, req.flash('failure_msg', 'Facebook Verification Failed'))
         }
       }
     )
