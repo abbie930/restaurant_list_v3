@@ -1,5 +1,5 @@
 # 我的餐廳清單 My restaurant List
-一個餐廳清單網站，可以瀏覽餐廳並查看詳細資訊。
+用 Node.js 打造的餐廳清單網站，能擁有一個屬於自己的餐廳清單，可以瀏覽並查看詳細資訊，也可以透過搜尋找到想要的餐廳！
 
 ![cover](./public/image/cover_restaurant_list_v3.png)
 
@@ -7,15 +7,17 @@
 
 ## 功能描述 Features
 
-* 使用者可以查看所有餐廳
-* 使用者可以瀏覽餐廳的詳細資訊
-* 使用者可以連結餐廳的地址到 Google map
-* 使用者可以透過搜尋餐廳名稱、類別找到特定的餐廳
+* 使用者可以註冊帳號
+* 使用者可以透過 Facebook 直接登入
+* 使用者必須登入才可使用餐廳清單
+* 使用者可以在首頁瀏覽全部餐廳
+* 使用者可以瀏覽餐廳的詳細資訊並連結地址到 Google map
+* 使用者可以搜尋名稱、類別找到特定的餐廳
 * 使用者可以設定餐廳排序
 * 使用者可以新增餐廳
 * 使用者可以編輯餐廳
-* 使用者可以修改餐廳
 * 使用者可以刪除餐廳
+
 
 ## 安裝與執行步驟 Installation and Execution
 1. 請先確認有安裝 Node.js 與 npm
@@ -34,17 +36,24 @@ cd restaurant_list_v3
 ```
 npm install
 ```
-5. 安裝完成後，輸入
+5. 建立 .env 檔 (參照.env.example)
+
+6. 載入種子資料
 
 ```
-npm run start
+npm run seed
 ```
-6. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
+7. 執行
+
+```
+npm run dev
+```
+8. 若看見此行訊息則代表順利運行，打開瀏覽器進入到以下網址
 
 ```
 Express is listening on http://localhost:3000
 ```
-7. 若要暫停使用，則輸入
+9. 若要暫停使用，則輸入
 
 ```
 ctrl + c
@@ -55,9 +64,11 @@ ctrl + c
 
 * Node.js 18.12.1
 * Express 4.16.4
-* Express-Handlebars 3.0.0
-* Bootstrap 5.1.1
-* Font-awesome 6.2.1
+* Express-handlebars 3.0.0
 * MongoDB
 * mongoose 5.9.7
-
+* method-override 3.0.0
+* express-session 1.17.1
+* passport 0.4.1
+* passport-facebook 3.0.0
+* passport-local 1.0.0
