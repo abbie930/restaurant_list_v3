@@ -10,24 +10,22 @@ module.exports = (app) => {
   app.use(passport.session())
 
   passport.use(
-    new LocalStrategy(
-      { usernameField: 'email', passReqToCallback: true },
-      (req, email, password, done) => {
-        User.findOne({ email })
-          .then((user) => {
-            if (!user) {
-              return done(null, false, req.flash('failure_msg', 'That email is not registered!'))
-            }
-            return bcrypt.compare(password, user.password).then((isMatch) => {
-              if (!isMatch) {
-                return done(null, false, req.flash('failure_msg', 'Email or Password incorrect.' ))
-              }
-              return done(null, user)
-            })
-          })
-          .catch((err) => done(err, false))
+    new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, async (req, email, password, done) => {
+      try {
+        const user = await User.findOne({ email })
+        if (!user) {
+          return done(null, false, req.flash('failure_msg', 'That email is not registered!'))
+        }
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+          return done(null, false, req.flash('failure_msg', 'Email or Password incorrect.'))
+        } else {
+          return done(null, user)
+        }
+      } catch (err) {
+        return done(err, false)
       }
-    )
+    })
   )
 
   passport.use(
@@ -37,39 +35,41 @@ module.exports = (app) => {
         clientSecret: process.env.FACEBOOK_SECRET,
         callbackURL: process.env.FACEBOOK_CALLBACK,
         profileFields: ['email', 'displayName'],
+        passReqToCallback: true,
       },
-      (accessToken, refreshToken, profile, done) => {
-        console.log('a', accessToken)
-        console.log('p', profile)
-        const { name, email } = profile._json
-        User.findOne({ email }).then((user) => {
-          console.log(user)
-          if (user) return done(null, user)
-          const randomPassword = Math.random().toString(36).slice(-8)
-          bcrypt
-            .genSalt(10)
-            .then((salt) => bcrypt.hash(randomPassword, salt))
-            .then((hash) =>
-              User.create({
-                name,
-                email,
-                password: hash,
-              })
-            )
-            .then((user) => done(null, user))
-            .catch((err) => done(err, false, req.flash('failure_msg', 'Facebook Verification Failed')))
-        })
+      async (req, accessToken, refreshToken, profile, done) => {
+        try {
+          const { name, email } = profile._json
+          const user = await User.findOne({ email })
+          if (user) {
+            return done(null, user)
+          } else {
+            const randomPassword = Math.random().toString(36).slice(-8)
+            const salt = await bcrypt.genSalt(10)
+            const hashedPassword = await bcrypt.hash(randomPassword, salt)
+            const newUserFromFb = await User.create({
+              name,
+              email,
+              password: hashedPassword,
+            })
+            return done(null, newUserFromFb)
+          }
+        } catch (err) {
+          return done(err, false, req.flash('failure_msg', 'Facebook Verification Failed'))
+        }
       }
     )
   )
 
-  passport.serializeUser((user, done) => {
-    done(null, user.id)
+  passport.serializeUser(async (user, done) => {
+    return done(null, user.id)
   })
-  passport.deserializeUser((id, done) => {
-    User.findById(id)
-      .lean()
-      .then((user) => done(null, user))
-      .catch((err) => done(err, null))
+  passport.deserializeUser(async (id, done) => {
+    try {
+      const user = await User.findById(id).lean()
+      return done(null, user)
+    } catch (err) {
+      return done(err, null)
+    }
   })
 }
