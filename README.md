@@ -1,7 +1,7 @@
 # 我的餐廳清單 My restaurant List
 用 Node.js 打造的餐廳清單網站，能擁有一個屬於自己的餐廳清單，可以瀏覽並查看詳細資訊，也可以透過搜尋找到想要的餐廳！
 
-![cover](./public/image/cover_restaurant_list_v3.png)
+![cover](./public/image/cover_restaurant_list_v3.jpg)
 
 
 
