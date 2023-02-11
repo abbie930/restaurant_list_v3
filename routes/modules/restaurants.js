@@ -29,10 +29,10 @@ router.post('/', async (req, res) => {
         errors.push({ message: 'Phone input is invalid. (ex. 02-2222-2222)' })
       }
       if (!validateResult.google_map) {
-        errors.push({ message: 'Google_map URL is invalid. ex. http(s)://...' })
+        errors.push({ message: 'Google_map URL is invalid. (ex. http(s)://......)' })
       }
       if (!validateResult.image) {
-        errors.push({ message: 'Image URL is invalid. ex. http(s)://...' })
+        errors.push({ message: 'Image URL is invalid. (ex. http(s)://......)' })
       }
       return res.render('new', { restaurant: req.body, errors })
     }
@@ -71,10 +71,10 @@ router.put('/:id', async (req, res) => {
         errors.push({ message: 'Phone input is invalid. (ex. 02-2222-2222)' })
       }
       if (!validateResult.google_map) {
-        errors.push({ message: 'Google_map URL is invalid. ex. http(s)://...' })
+        errors.push({ message: 'Google_map URL is invalid. (ex. http(s)://......)' })
       }
       if (!validateResult.image) {
-        errors.push({ message: 'Image URL is invalid. ex. http(s)://...' })
+        errors.push({ message: 'Image URL is invalid. (ex. http(s)://......)' })
       }
       return res.render('new', { restaurant: newData, errors })
     }
