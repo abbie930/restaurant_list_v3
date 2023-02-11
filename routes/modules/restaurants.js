@@ -21,22 +21,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const errors = []
     const validateResult = validateFormInput(req.body)
     const formIsInvalidate = Object.values(validateResult).includes(false)
     if (formIsInvalidate) {
-      if (!validateResult.phone) {
-        errors.push({ message: 'Phone input is invalid. (ex. 02-2222-2222)' })
-      }
-      if (!validateResult.google_map) {
-        errors.push({ message: 'Google_map URL is invalid. (ex. http(s)://......)' })
-      }
-      if (!validateResult.image) {
-        errors.push({ message: 'Image URL is invalid. (ex. http(s)://......)' })
-      }
-      return res.render('new', { restaurant: req.body, errors })
+      return res.render('new', { restaurant: req.body, validateResult })
     }
-
     const newData = req.body
     const userId = req.user._id
     const restaurant = await Restaurant.create({ ...newData, userId })
@@ -62,24 +51,15 @@ router.put('/:id', async (req, res) => {
   try {
     const userId = req.user._id
     const _id = req.params.id
-    const newData = req.body
-    const errors = []
-    const validateResult = validateFormInput(newData)
+    const restaurant = req.body
+    const validateResult = validateFormInput(restaurant)
     const formIsInvalidate = Object.values(validateResult).includes(false)
+    restaurant._id = _id
     if (formIsInvalidate) {
-      if (!validateResult.phone) {
-        errors.push({ message: 'Phone input is invalid. (ex. 02-2222-2222)' })
-      }
-      if (!validateResult.google_map) {
-        errors.push({ message: 'Google_map URL is invalid. (ex. http(s)://......)' })
-      }
-      if (!validateResult.image) {
-        errors.push({ message: 'Image URL is invalid. (ex. http(s)://......)' })
-      }
-      return res.render('new', { restaurant: newData, errors })
+      return res.render('edit', { restaurant, validateResult })
     }
-    await Restaurant.findOneAndUpdate({ _id, userId }, { ...newData, userId })
-    res.redirect(`/restaurants/${_id}`)
+    await Restaurant.findOneAndUpdate({ _id, userId }, { ...restaurant, userId })
+    return res.redirect(`/restaurants/${_id}`)
   } catch (err) {
     console.log(err)
   }
